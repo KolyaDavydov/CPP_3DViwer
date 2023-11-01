@@ -1,0 +1,59 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[russian]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{3DViewer v1.0}
+\author{marianel, ilanadah, nohoteth}
+
+\begin{document}
+\maketitle
+
+\section{Введение}
+3Д-обозреватель :
+    \begin{itemize}
+        \item Предназначен для просмотра 3D моделей в каркасном виде.
+        \item Поддерживает вращение, масштабирование и перемещение моделей.
+        \item Поддерживает следующие операции:
+        \begin{enumerate}
+            \item Загрузка каркасных моделей из файла формата obj (поддержка только списка вершин и поверхностей);
+            \item Перемещение модели на заданное расстояние относительно осей X, Y, Z;
+            \item Поворот модели на заданное расстояние относительно осей X, Y, Z;
+            \item Масштабирование модели на заданное значение.
+            \item Программа должна позволять настраивать тип проекции (параллельная и центральная);
+            \item Программа позволяет настраивать тип (сплошная, пунктирная), цвет и толщину ребер, способ отображения (отсутствует, круг, квадрат), цвет и размер вершин;
+            \item Программа позволяет выбирать цвет фона;
+            \item Настройки должны сохраняться между перезапусками программы
+        \end{enumerate}
+        \item Программа позволяет сохранять полученные ("отрендеренные") изображения в файл в форматах bmp и jpeg
+        \item Программа позволяет записывать небольшие "скринкасты" 
+    \end{itemize}
+
+\section{Установка}
+
+\begin{enumerate}
+    \item Скачайте репозиторий проекта;
+    \item Перейдите в терминале в папку src проекта;
+    \item Выполните \textbf{make install};
+    \item Откройте папку приложения на рабочем столе и запустите приложение.
+\end{enumerate}
+
+\section{Удаление}
+
+\begin{enumerate}
+    \item Перейдите в терминале в папку src проекта;
+    \item Выполните: \textbf{make uninstall};
+    \item Удалите папку проекта.
+\end{enumerate}
+
+\end{document}
