@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../Icons/angle-circle-down.png</file>
+        <file>../Icons/angle-circle-in.png</file>
+        <file>../Icons/angle-circle-left.png</file>
+        <file>../Icons/angle-circle-out.png</file>
+        <file>../Icons/angle-circle-right.png</file>
+        <file>../Icons/angle-circle-up.png</file>
+        <file>../Icons/angle-down.png</file>
+        <file>../Icons/angle-in.png</file>
+        <file>../Icons/angle-left.png</file>
+        <file>../Icons/angle-out.png</file>
+        <file>../Icons/angle-right.png</file>
+        <file>../Icons/angle-up.png</file>
+        <file>../Icons/camera.png</file>
+        <file>../Icons/search.png</file>
+        <file>../Icons/video-camera-alt.png</file>
+        <file>../Icons/zoom-in.png</file>
+        <file>../Icons/zoom-out.png</file>
+    </qresource>
+</RCC>
