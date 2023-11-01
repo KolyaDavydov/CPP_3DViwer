@@ -15,8 +15,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "../s21_get_data_viewer.h"
-#include "../s21_matrix.h"
+#include "../model/s21_get_data_viewer.h"
+#include "../model/s21_matrix.h"
 #ifdef __cplusplus
 }
 #endif

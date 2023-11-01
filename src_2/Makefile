@@ -33,7 +33,8 @@ cppcheck:
 
 build:
 	mkdir build
-	cd ./build/ && qmake ../Viewer/ && make
+	cd ./build/ && qmake ../view/ && make
+	./build/Viewer
 
 s21_matrix.a: $(SOURSES_MATRIX)
 	$(CC) $(CFLAGS) -c $(SOURSES_MATRIX)
