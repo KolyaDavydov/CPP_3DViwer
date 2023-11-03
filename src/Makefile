@@ -2,11 +2,11 @@ APP = build/Viewer.app
 CC=					gcc 
 CFLAGS=				-Wall -Werror -Wextra -std=c11 -pedantic
 GCOVFLAGS=			-fprofile-arcs -ftest-coverage
-SOURSES_GET_DATA=	s21_get_d*.c
+SOURSES_GET_DATA=	model/s21_get_d*.c
 OBJECT_GET_DATA=	$(patsubst %*.c, %*.o, $(SOURSES_GET_DATA))
-SOURSES_MATRIX=		s21_m*.c
+SOURSES_MATRIX=		model/s21_m*.c
 OBJECT_MATRIX=		$(patsubst %*.c, %*.o, $(SOURSES_MATRIX))
-SOURSES_TEST=		test_*.c
+SOURSES_TEST=		test/test_*.c
 OS=					$(shell uname -s)
 
 ifeq ($(OS), Linux)
@@ -22,10 +22,9 @@ all: build
 
 check:
 	cp ../materials/linters/.clang-format ./
-	clang-format -n *.c
-	clang-format -n *.h
-	clang-format -n Viewer/*.cpp
-	clang-format -n Viewer/*.h
+	clang-format -n */*.cc
+	clang-format -n */*.h
+	clang-format -n */*.c
 	rm -rf .clang-format
 
 cppcheck:
@@ -33,21 +32,22 @@ cppcheck:
 
 build:
 	mkdir build
-	cd ./build/ && qmake ../Viewer/ && make
+	cd ./build/ && qmake ../view/ && make
+	./build/Viewer
 
 s21_matrix.a: $(SOURSES_MATRIX)
 	$(CC) $(CFLAGS) -c $(SOURSES_MATRIX)
-	@ar rcs s21_matrix.a $(OBJECT_MATRIX)
+	@ar rcs s21_matrix.a s21_matrix.o
 	@rm -rf ./*.o
 
 s21_get_data_viewer.a: rebuild_lib_matrix $(SOURSES_GET_DATA)
 	$(CC) $(CFLAGS) -c $(SOURSES_GET_DATA)
-	@ar rcs s21_get_data_viewer.a $(OBJECT_GET_DATA)
+	@ar rcs s21_get_data_viewer.a s21_get_data_viewer.o
 	@rm -rf ./*.o
 
 tests: rebuild_lib_matrix rebuild_lib_get_data $(SOURSES_TEST)
-	$(CC) $(CFLAGS) $(SOURSES_TEST) s21_matrix.a s21_get_data_viewer.a $(CHECKFLAGS) -o test
-	./test
+	$(CC) $(CFLAGS) $(SOURSES_TEST) s21_matrix.a s21_get_data_viewer.a $(CHECKFLAGS) -o tests
+	./tests
 
 gcov_report: rebuild_lib_matrix rebuild_lib_get_data
 	@gcc $(GCOVFLAGS) $(SOURSES_TEST) $(SOURSES_MATRIX) $(SOURSES_GET_DATA) $(CHECKFLAGS) -o GcovReport
@@ -58,7 +58,7 @@ gcov_report: rebuild_lib_matrix rebuild_lib_get_data
 	@rm -rf ./*.gcno ./*.gcda ./GcovReport.*
 
 clean:
-	@rm -rf ./a.out ./*.o ./*.a ./test ./GcovReport ./report
+	@rm -rf ./a.out ./*.o ./*.a ./GcovReport ./report
 	@rm -rf *.aux *.dvi *.log *.out *.pdf
 	@rm -rf build/
 

@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 
+#include <iostream>
+
 #include "qgifimage.h"
 #include "ui_mainwindow.h"
 
@@ -36,19 +38,22 @@ void MainWindow::on_pushButton_open_clicked() {
   QString file_name = QFileDialog::getOpenFileName(
       this, tr("Открыть модель"), "../Objects", "Объектные файлы (*.obj)");
   if (!file_name.isEmpty() && !file_name.isNull()) {
-    QByteArray file_name_ba = file_name.toLocal8Bit();
-    char *file_name_char = file_name_ba.data();
+    std::string file_name_ = file_name.toStdString();
 
-    int error = 0;
-    ui->widget->gl_model = s21_get_data_viewer(file_name_char, &error);
-    if (!error) {
+    ui->widget->gl_model = s21::Controller(file_name_);
+
+    bool is_valid = ui->widget->gl_model.IsValid();
+
+    if (is_valid == true) {
       ui->widget->gl_model_loaded = true;
       ui->widget->update();
       ui->label_fileName->setText(file_name);
       ui->label_countV->setText(
-          QString("%1").arg(ui->widget->gl_model.number_v));
+          QString("%1").arg(ui->widget->gl_model.GetCountOfVertexes()));
       ui->label_countF->setText(
-          QString("%1").arg(ui->widget->gl_model.number_facets_all));
+          QString("%1").arg(ui->widget->gl_model.GetCountOfFacets()));
+    } else {
+      ui->label_fileName->setText("ФАЙЛ БИТЫЙ!");
     }
   }
 }
@@ -56,7 +61,7 @@ void MainWindow::on_pushButton_open_clicked() {
 void MainWindow::on_pushButton_moveX_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double X = (-1) * ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, X, 0);
+    ui->widget->gl_model.Moving(X, 0);
     ui->widget->update();
   }
 }
@@ -64,7 +69,7 @@ void MainWindow::on_pushButton_moveX_minus_clicked() {
 void MainWindow::on_pushButton_moveX_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double X = ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, X, 0);
+    ui->widget->gl_model.Moving(X, 0);
     ui->widget->update();
   }
 }
@@ -72,7 +77,7 @@ void MainWindow::on_pushButton_moveX_plus_clicked() {
 void MainWindow::on_pushButton_moveY_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double Y = (-1) * ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, Y, 1);
+    ui->widget->gl_model.Moving(Y, 1);
     ui->widget->update();
   }
 }
@@ -80,7 +85,7 @@ void MainWindow::on_pushButton_moveY_minus_clicked() {
 void MainWindow::on_pushButton_moveY_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double Y = ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, Y, 1);
+    ui->widget->gl_model.Moving(Y, 1);
     ui->widget->update();
   }
 }
@@ -88,7 +93,7 @@ void MainWindow::on_pushButton_moveY_plus_clicked() {
 void MainWindow::on_pushButton_moveZ_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double Z = (-1) * ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, Z, 2);
+    ui->widget->gl_model.Moving(Z, 2);
     ui->widget->update();
   }
 }
@@ -96,7 +101,7 @@ void MainWindow::on_pushButton_moveZ_minus_clicked() {
 void MainWindow::on_pushButton_moveZ_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double Z = ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, Z, 2);
+    ui->widget->gl_model.Moving(Z, 2);
     ui->widget->update();
   }
 }
@@ -104,7 +109,7 @@ void MainWindow::on_pushButton_moveZ_plus_clicked() {
 void MainWindow::on_pushButton_rotateX_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 0);
+    ui->widget->gl_model.Rotation(angle, 0);
     ui->widget->update();
   }
 }
@@ -112,7 +117,7 @@ void MainWindow::on_pushButton_rotateX_plus_clicked() {
 void MainWindow::on_pushButton_rotateX_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = (-1) * ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 0);
+    ui->widget->gl_model.Rotation(angle, 0);
     ui->widget->update();
   }
 }
@@ -120,7 +125,7 @@ void MainWindow::on_pushButton_rotateX_minus_clicked() {
 void MainWindow::on_pushButton_rotateY_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 1);
+    ui->widget->gl_model.Rotation(angle, 1);
     ui->widget->update();
   }
 }
@@ -128,7 +133,7 @@ void MainWindow::on_pushButton_rotateY_plus_clicked() {
 void MainWindow::on_pushButton_rotateY_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = (-1) * ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 1);
+    ui->widget->gl_model.Rotation(angle, 1);
     ui->widget->update();
   }
 }
@@ -136,7 +141,7 @@ void MainWindow::on_pushButton_rotateY_minus_clicked() {
 void MainWindow::on_pushButton_rotateZ_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 2);
+    ui->widget->gl_model.Rotation(angle, 2);
     ui->widget->update();
   }
 }
@@ -144,21 +149,21 @@ void MainWindow::on_pushButton_rotateZ_plus_clicked() {
 void MainWindow::on_pushButton_rotateZ_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = (-1) * ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 2);
+    ui->widget->gl_model.Rotation(angle, 2);
     ui->widget->update();
   }
 }
 
 void MainWindow::on_pushButton_scale_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
-    s21_scaling(&ui->widget->gl_model, 0.5);
+    ui->widget->gl_model.Scaling(0.5);
     ui->widget->update();
   }
 }
 
 void MainWindow::on_pushButton_scale_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
-    s21_scaling(&ui->widget->gl_model, 2);
+    ui->widget->gl_model.Scaling(2);
     ui->widget->update();
   }
 }
@@ -166,7 +171,7 @@ void MainWindow::on_pushButton_scale_plus_clicked() {
 void MainWindow::on_pushButton_scale_clicked() {
   if (ui->widget->gl_model_loaded) {
     double scale = ui->lineEdit_scale->text().toDouble();
-    if (scale != 0) s21_scaling(&ui->widget->gl_model, scale);
+    if (scale != 0) ui->widget->gl_model.Scaling(scale);
     ui->widget->update();
   }
 }
@@ -316,7 +321,5 @@ void MainWindow::on_checkBox_circle_vertex_stateChanged(int arg1) {
 
 void MainWindow::closeEvent(QCloseEvent *event) {
   ui->widget->settings_save();
-  if (ui->widget->gl_model_loaded)
-    s21_remove_data_viewer(&ui->widget->gl_model);
   event->accept();
 }

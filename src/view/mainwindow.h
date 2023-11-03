@@ -12,14 +12,8 @@
 #define GIF_WIDTH 640
 #define GIF_HIGHT 480
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-#include "../s21_get_data_viewer.h"
-#include "../s21_matrix.h"
-#ifdef __cplusplus
-}
-#endif
+// #include "../model/model.h"
+#include "../controller/controller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

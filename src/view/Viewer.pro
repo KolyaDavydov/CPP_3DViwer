@@ -1,4 +1,6 @@
-QT       += core gui openglwidgets
+# QT       += core gui openglwidgets
+
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 greaterThan(QT_MAJOR_VERSION, 5): QT += openglwidgets
@@ -12,15 +14,14 @@ CONFIG += \
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    ../s21_get_data_viewer.c \
-    ../s21_matrix.c \
-    main.cpp \
-    mainwindow.cpp \
-    objectviewer.cpp
+    ../model/model.cc \
+    main.cc \
+    mainwindow.cc \
+    objectviewer.cc
 
 HEADERS += \
-    ../s21_get_data_viewer.h \
-    ../s21_matrix.h \
+    ../model/model.h \
+    ../controller/controller.h \
     mainwindow.h \
     objectviewer.h
 

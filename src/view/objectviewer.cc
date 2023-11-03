@@ -1,5 +1,7 @@
 #include "objectviewer.h"
 
+#include <iostream>
+
 ObjectViewer::ObjectViewer(QWidget *parent) : QOpenGLWidget{parent} {
   settings = new QSettings(this);
   settings_load();
@@ -39,8 +41,7 @@ void ObjectViewer::gl_model_draw() {
   } else {
     glDisable(GL_POINT_SMOOTH);
   }
-
-  for (int i = 0; i < gl_model.number_f; i++) {
+  for (auto i = 0; i < gl_model.GetCountOfFacets(); ++i) {
     if (this->draw_vertexes) gl_polygon_draw(GL_POINTS, this->color_v, i);
     if (this->draw_facets) gl_polygon_draw(GL_LINE_LOOP, this->color_f, i);
   }
@@ -50,12 +51,16 @@ void ObjectViewer::gl_polygon_draw(GLenum gl_type, QColor color,
                                    int polygon_number) {
   glBegin(gl_type);
   glColor3f(color.red() / 255.0, color.green() / 255.0, color.blue() / 255.0);
-  for (int j = 0; j < gl_model.polygons[polygon_number].number_v_in_facets;
-       j++) {
-    unsigned number = gl_model.polygons[polygon_number].v_in_facets[j] - 1;
-    glVertex3d(gl_model.matrix.matrix[number][0],
-               gl_model.matrix.matrix[number][1],
-               gl_model.matrix.matrix[number][2]);
+
+  int whic_in_facet = 0;
+  for (int i = 0; i < polygon_number; ++i) {
+    whic_in_facet += gl_model.GetSizeFacets()[i] * 2;
+  }
+  for (int j = 0; j < gl_model.GetSizeFacets()[polygon_number]; ++j) {
+    int num = gl_model.GetFacets()[whic_in_facet + j * 2];
+    glVertex3d(gl_model.GetVertexes()[num * 3],
+               gl_model.GetVertexes()[num * 3 + 1],
+               gl_model.GetVertexes()[num * 3 + 2]);
   }
   glEnd();
 }

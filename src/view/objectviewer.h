@@ -6,14 +6,7 @@
 #include <QSettings>
 #include <QWidget>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-#include "../s21_get_data_viewer.h"
-#include "../s21_matrix.h"
-#ifdef __cplusplus
-}
-#endif
+#include "../controller/controller.h"
 
 class ObjectViewer : public QOpenGLWidget {
   Q_OBJECT
@@ -27,7 +20,7 @@ class ObjectViewer : public QOpenGLWidget {
   void settings_load();
   void settings_save();
 
-  data_viewer_t gl_model;
+  s21::Controller gl_model;
   bool gl_model_loaded = 0;
 
   // Свойства интерфейса
