@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 
+#include <iostream>
+
 #include "qgifimage.h"
 #include "ui_mainwindow.h"
 
@@ -41,25 +43,58 @@ void MainWindow::on_pushButton_open_clicked() {
 
     int error = 0;
     ui->widget->gl_model = s21_get_data_viewer(file_name_char, &error);
-    if (!error) {
+    
+    std::string file_name_cha = file_name.toStdString();
+    
+    ui->widget->gl_mode = s21::Model(file_name_cha);
+    
+    bool is_valid = ui->widget->gl_mode.IsValid();
+
+          int whic_in_facet = 0;
+  for(int i = 0; i < 11; i++) {
+    whic_in_facet += ui->widget->gl_mode.GetSizeFacets()[11] * 2;
+  }
+
+    if (!error && is_valid == true) {
       ui->widget->gl_model_loaded = true;
       ui->widget->update();
       ui->label_fileName->setText(file_name);
       ui->label_countV->setText(
-          QString("%1").arg(ui->widget->gl_model.number_v));
+          QString("%1").arg(ui->widget->gl_mode.GetCountOfVertexes()));
       ui->label_countF->setText(
-          QString("%1").arg(ui->widget->gl_model.number_facets_all));
+          QString("%1").arg(ui->widget->gl_mode.GetFacets()[6]));
     }
+    
   }
 }
+// ui->widget->gl_model.number_facets_all
+// GetCountOfFacets() * 3
 
+// void MainWindow::on_pushButton_moveX_minus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double X = (-1) * ui->lineEdit_move->text().toDouble();
+//     s21_moving(&ui->widget->gl_model, X, 0);
+//     ui->widget->update();
+//   }
+// }
+// void MainWindow::on_pushButton_scale_minus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     ui->widget->gl_mode.scaling(0.5);
+    
+//     ui->widget->update();
+//     // std::cout << "asd  " << ui->widget->gl_mode.vertexes_[0] << std::endl;
+//   }
+// }
 void MainWindow::on_pushButton_moveX_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double X = (-1) * ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, X, 0);
+    ui->widget->gl_mode.moving(X, 0);
+    std::cout << X << std::endl;
     ui->widget->update();
   }
 }
+// void moving(std::vector<double> vertexes_, double distance, int direction);
+// moving
 
 void MainWindow::on_pushButton_moveX_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
@@ -149,10 +184,19 @@ void MainWindow::on_pushButton_rotateZ_minus_clicked() {
   }
 }
 
+// void MainWindow::on_pushButton_scale_minus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     s21_scaling(&ui->widget->gl_model, 0.5);
+//     ui->widget->update();
+//   }
+// }
+
 void MainWindow::on_pushButton_scale_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
-    s21_scaling(&ui->widget->gl_model, 0.5);
+    ui->widget->gl_mode.scaling(0.5);
+    
     ui->widget->update();
+    // std::cout << "asd  " << ui->widget->gl_mode.vertexes_[0] << std::endl;
   }
 }
 

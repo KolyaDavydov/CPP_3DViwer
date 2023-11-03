@@ -21,6 +21,8 @@ extern "C" {
 }
 #endif
 
+#include "../model/model.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;

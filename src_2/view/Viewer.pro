@@ -16,6 +16,7 @@ CONFIG += \
 SOURCES += \
     ../model/s21_get_data_viewer.c \
     ../model/s21_matrix.c \
+    ../model/model.cc \
     main.cpp \
     mainwindow.cpp \
     objectviewer.cpp
@@ -23,6 +24,7 @@ SOURCES += \
 HEADERS += \
     ../model/s21_get_data_viewer.h \
     ../model/s21_matrix.h \
+    ../model/model.cc \
     mainwindow.h \
     objectviewer.h
 

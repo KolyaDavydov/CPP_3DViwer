@@ -45,6 +45,7 @@ void Model::Parce() {
     try {
       if (str == "v") {
         ReadVertexes(ss);
+        ++count_of_vertexes_;
       } else if (str == "f") {
         ReadFacets(ss);
         ++count_of_facets_;
@@ -102,10 +103,14 @@ void Model::ReadFacets(std::stringstream& ss) {
   int count{};
   unsigned int num_dbl{};
   std::string substr, num, first;
+
+    int size_facet{};// !!!
+
   for (count = 0; ss >> substr; ++count) {
     for (auto it = substr.begin(); it != substr.end() && *it != '/'; ++it) {
       num += *it;
     }
+    num_dbl = std::stoi(num) - 1; // !!
     num_dbl = std::stoi(num) - 1;
     facets_.push_back(num_dbl);
     if (count)
@@ -113,13 +118,16 @@ void Model::ReadFacets(std::stringstream& ss) {
     else
       first = num;
     num = "";
+    ++size_facet;// !!!
   }
   if (count < 2) {
     is_valid_ = false;
     ResetValues();
   } else {
     facets_.push_back(std::stoi(first) - 1);
-    polygon_size_ += count * 2;
+    polygon_size_ += count;
+    // polygon_size_ += count * 2; // !!!
+    size_facets_.push_back(size_facet); // !!!
   }
 };
 
@@ -139,8 +147,30 @@ void Model::ResetValues() {
 // нужно переместить фигуру и направление в котором нужно переместить direction
 // = 0 - x direction = 1 - y direction = 2 - z s21_moving(&data, 2, 0); -
 // смещение по х на 2
-void Model::moving(std::vector<double> vertexes_, double distance, int direction) {
-  for (auto i = vertexes_.begin() + direction; i < vertexes_.end(); i += 3)
-    *i += distance;
+void Model::moving(double distance, int direction) {
+  for (int i = direction; i < this->vertexes_.size(); i +=3) {
+    this->vertexes_[i] += distance;
+    // std::cout << *i << std::endl;
+  }
+
 }
+
+// void Model::scaling(std::vector<double> vertexes_, double scale) {
+//     //   for (auto i = vertexes_.begin(); i < vertexes_.end(); ++i) {
+//     // *i *= scale;
+//     for (int i = 0; i < vertexes_.size(); i++) {
+//         vertexes_[i] *= scale;
+//         std::cout << i << vertexes_[i] << std::endl;
+//     } 
+// }
+
+void Model::scaling(double scale) {
+    //   for (auto i = vertexes_.begin(); i < vertexes_.end(); ++i) {
+    // *i *= scale;
+    for (int i = 0; i < this->vertexes_.size(); i++) {
+        this->vertexes_[i] *= scale;
+        std::cout << i << this->vertexes_[i] << std::endl;
+    } 
+}
+
 } // s21

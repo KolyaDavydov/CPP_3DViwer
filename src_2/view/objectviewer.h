@@ -15,6 +15,8 @@ extern "C" {
 }
 #endif
 
+#include "../model/model.h"
+
 class ObjectViewer : public QOpenGLWidget {
   Q_OBJECT
 
@@ -28,6 +30,7 @@ class ObjectViewer : public QOpenGLWidget {
   void settings_save();
 
   data_viewer_t gl_model;
+  s21::Model gl_mode;
   bool gl_model_loaded = 0;
 
   // Свойства интерфейса
