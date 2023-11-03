@@ -13,6 +13,7 @@
 #define GIF_HIGHT 480
 
 #include "../model/model.h"
+#include "../controller/controller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

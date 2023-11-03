@@ -39,8 +39,9 @@ void MainWindow::on_pushButton_open_clicked() {
       this, tr("Открыть модель"), "../Objects", "Объектные файлы (*.obj)");
   if (!file_name.isEmpty() && !file_name.isNull()) {
     std::string file_name_ = file_name.toStdString();
+    // std::cout << "ASD" << std::endl;
 
-    ui->widget->gl_model = s21::Model(file_name_);
+    ui->widget->gl_model = s21::Controller(file_name_);
 
     bool is_valid = ui->widget->gl_model.IsValid();
 

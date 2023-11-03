@@ -21,6 +21,7 @@ SOURCES += \
 
 HEADERS += \
     ../model/model.h \
+    ../controller/controller.h \
     mainwindow.h \
     objectviewer.h
 

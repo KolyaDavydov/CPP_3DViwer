@@ -16,6 +16,7 @@
 // #endif
 
 #include "../model/model.h"
+#include "../controller/controller.h"
 
 class ObjectViewer : public QOpenGLWidget {
   Q_OBJECT
@@ -29,7 +30,8 @@ class ObjectViewer : public QOpenGLWidget {
   void settings_load();
   void settings_save();
 
-  s21::Model gl_model;
+  // s21::Model gl_model;
+  s21::Controller gl_model;
   bool gl_model_loaded = 0;
 
   // Свойства интерфейса
