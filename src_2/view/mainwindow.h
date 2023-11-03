@@ -12,15 +12,6 @@
 #define GIF_WIDTH 640
 #define GIF_HIGHT 480
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-#include "../model/s21_get_data_viewer.h"
-#include "../model/s21_matrix.h"
-#ifdef __cplusplus
-}
-#endif
-
 #include "../model/model.h"
 
 QT_BEGIN_NAMESPACE

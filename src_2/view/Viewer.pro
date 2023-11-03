@@ -14,17 +14,13 @@ CONFIG += \
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    ../model/s21_get_data_viewer.c \
-    ../model/s21_matrix.c \
     ../model/model.cc \
-    main.cpp \
-    mainwindow.cpp \
-    objectviewer.cpp
+    main.cc \
+    mainwindow.cc \
+    objectviewer.cc
 
 HEADERS += \
-    ../model/s21_get_data_viewer.h \
-    ../model/s21_matrix.h \
-    ../model/model.cc \
+    ../model/model.h \
     mainwindow.h \
     objectviewer.h
 

@@ -22,10 +22,9 @@ all: build
 
 check:
 	cp ../materials/linters/.clang-format ./
-	clang-format -n *.c
-	clang-format -n *.h
-	clang-format -n Viewer/*.cpp
-	clang-format -n Viewer/*.h
+	clang-format -n */*.cc
+	clang-format -n */*.h
+	clang-format -n */*.cpp
 	rm -rf .clang-format
 
 cppcheck:
