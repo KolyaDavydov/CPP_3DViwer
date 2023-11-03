@@ -89,97 +89,185 @@ void MainWindow::on_pushButton_moveX_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double X = (-1) * ui->lineEdit_move->text().toDouble();
     ui->widget->gl_mode.moving(X, 0);
-    std::cout << X << std::endl;
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
-// void moving(std::vector<double> vertexes_, double distance, int direction);
-// moving
 
+// void MainWindow::on_pushButton_moveX_plus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double X = ui->lineEdit_move->text().toDouble();
+//     s21_moving(&ui->widget->gl_model, X, 0);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_moveX_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double X = ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, X, 0);
+    ui->widget->gl_mode.moving(X, 0);
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
 
+// void MainWindow::on_pushButton_moveY_minus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double Y = (-1) * ui->lineEdit_move->text().toDouble();
+//     s21_moving(&ui->widget->gl_model, Y, 1);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_moveY_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double Y = (-1) * ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, Y, 1);
+    ui->widget->gl_mode.moving(Y, 1);
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
 
+// void MainWindow::on_pushButton_moveY_plus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double Y = ui->lineEdit_move->text().toDouble();
+//     s21_moving(&ui->widget->gl_model, Y, 1);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_moveY_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double Y = ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, Y, 1);
+    ui->widget->gl_mode.moving(Y, 1);
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
 
+// void MainWindow::on_pushButton_moveZ_minus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double Z = (-1) * ui->lineEdit_move->text().toDouble();
+//     s21_moving(&ui->widget->gl_model, Z, 2);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_moveZ_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double Z = (-1) * ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, Z, 2);
+    ui->widget->gl_mode.moving(Z, 2);
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
 
+// void MainWindow::on_pushButton_moveZ_plus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double Z = ui->lineEdit_move->text().toDouble();
+//     s21_moving(&ui->widget->gl_model, Z, 2);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_moveZ_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double Z = ui->lineEdit_move->text().toDouble();
-    s21_moving(&ui->widget->gl_model, Z, 2);
+    ui->widget->gl_mode.moving(Z, 2);
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
 
+// void MainWindow::on_pushButton_rotateX_plus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double angle = ui->lineEdit_rotate->text().toDouble();
+//     s21_rotation(&ui->widget->gl_model, angle, 0);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_rotateX_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 0);
+    ui->widget->gl_mode.rotation(angle, 0);
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
 
+// void Model::rotation(double angle, int direction)
+
+// void MainWindow::on_pushButton_rotateX_minus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double angle = (-1) * ui->lineEdit_rotate->text().toDouble();
+//     s21_rotation(&ui->widget->gl_model, angle, 0);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_rotateX_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = (-1) * ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 0);
+    ui->widget->gl_mode.rotation(angle, 0);
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
 
+// void MainWindow::on_pushButton_rotateY_plus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double angle = ui->lineEdit_rotate->text().toDouble();
+//     s21_rotation(&ui->widget->gl_model, angle, 1);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_rotateY_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 1);
+    ui->widget->gl_mode.rotation(angle, 1);
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
 
+// void MainWindow::on_pushButton_rotateY_minus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double angle = (-1) * ui->lineEdit_rotate->text().toDouble();
+//     s21_rotation(&ui->widget->gl_model, angle, 1);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_rotateY_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = (-1) * ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 1);
+    ui->widget->gl_mode.rotation(angle, 1);
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
 
+// void MainWindow::on_pushButton_rotateZ_plus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double angle = ui->lineEdit_rotate->text().toDouble();
+//     s21_rotation(&ui->widget->gl_model, angle, 2);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_rotateZ_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 2);
+    ui->widget->gl_mode.rotation(angle, 2);
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
 
+// void MainWindow::on_pushButton_rotateZ_minus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double angle = (-1) * ui->lineEdit_rotate->text().toDouble();
+//     s21_rotation(&ui->widget->gl_model, angle, 2);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_rotateZ_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
     double angle = (-1) * ui->lineEdit_rotate->text().toDouble();
-    s21_rotation(&ui->widget->gl_model, angle, 2);
+    ui->widget->gl_mode.rotation(angle, 2);
+    // std::cout << X << std::endl;
     ui->widget->update();
   }
 }
@@ -193,24 +281,35 @@ void MainWindow::on_pushButton_rotateZ_minus_clicked() {
 
 void MainWindow::on_pushButton_scale_minus_clicked() {
   if (ui->widget->gl_model_loaded) {
-    ui->widget->gl_mode.scaling(0.5);
-    
+    ui->widget->gl_mode.scaling(0.5); 
     ui->widget->update();
-    // std::cout << "asd  " << ui->widget->gl_mode.vertexes_[0] << std::endl;
   }
 }
 
+// void MainWindow::on_pushButton_scale_plus_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     s21_scaling(&ui->widget->gl_model, 2);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_scale_plus_clicked() {
   if (ui->widget->gl_model_loaded) {
-    s21_scaling(&ui->widget->gl_model, 2);
+    ui->widget->gl_mode.scaling(2); 
     ui->widget->update();
   }
 }
 
+// void MainWindow::on_pushButton_scale_clicked() {
+//   if (ui->widget->gl_model_loaded) {
+//     double scale = ui->lineEdit_scale->text().toDouble();
+//     if (scale != 0) s21_scaling(&ui->widget->gl_model, scale);
+//     ui->widget->update();
+//   }
+// }
 void MainWindow::on_pushButton_scale_clicked() {
   if (ui->widget->gl_model_loaded) {
     double scale = ui->lineEdit_scale->text().toDouble();
-    if (scale != 0) s21_scaling(&ui->widget->gl_model, scale);
+    if (scale != 0) ui->widget->gl_mode.scaling(scale);
     ui->widget->update();
   }
 }

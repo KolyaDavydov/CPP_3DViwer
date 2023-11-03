@@ -29,6 +29,8 @@ class Model {
     void moving(double distance, int direction);
     // void scaling(std::vector<double> vertexes_, double scale);
     void scaling(double scale);
+    void rotation(double angle, int direction);
+    void normalize();
 
 
  private:
@@ -42,6 +44,10 @@ class Model {
   std::size_t polygon_size_{};
 
   std::vector<unsigned int> size_facets_{};// !!!
+
+  double rotateX_ = 0;
+  double rotateY_ = 0;
+  double rotateZ_ = 0;
 
   void Close() {
     if (file_.is_open()) file_.close();
